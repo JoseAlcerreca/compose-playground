@@ -28,35 +28,52 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.view.get
 
-class MainActivity : AppCompatActivity() {
+class MainInteropActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             MyApplicationTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(color = MaterialTheme.colors.background) {
-                    Counter()
+                    AndroidViewSample()
                 }
             }
         }
     }
 }
 
-@Composable
-fun Counter() {
-    var counter by remember { mutableStateOf(0) }
-    Column {
-        Button(modifier = Modifier.padding(16.dp), onClick = { counter++ }) {
-            Text(stringResource(R.string.bt_increment_counter))
-        }
-        Text(text = stringResource(R.string.clicks_count, counter))
-    }
-}
 
 @Preview(showBackground = true)
 @Composable
-fun DefaultPreview() {
+fun InteropPreview() {
     MyApplicationTheme {
-        Counter()
+        AndroidViewSample()
+    }
+}
+
+@Composable
+fun AndroidViewSample() {
+
+    val text = remember { mutableStateOf("Hello Views") }
+    Column {
+        Button(onClick = {text.value = "Hello Compose" } ) {
+            Text("Click here")
+        }
+        AndroidView(
+            modifier = Modifier.fillMaxHeight(),
+            update = { (it[0] as TextView).text = text.value },
+            viewBlock = {
+                FrameLayout(it).apply {
+                    setPadding(100, 100, 100, 100)
+                    setBackgroundColor(0xFF888888.toInt())
+                    layoutParams = LayoutParams(
+                        LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT
+                    )
+                    val tv = TextView(it)
+                    tv.text = text.value
+                    addView(tv)
+                }
+            }
+        )
     }
 }
