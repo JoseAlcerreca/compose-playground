@@ -23,10 +23,12 @@ class CounterTest {
 
     @Test
     fun clickButton_incrementsCounter() {
-        // Click on the button to increment the number of clicks
-        composeTestRule.onNodeWithText(composeTestRule.activity.getString(R.string.bt_increment_counter)).performClick()
-
+        repeat(3) {
+            // Click on the button to increment the number of clicks
+            composeTestRule.onNodeWithText(composeTestRule.activity.getString(R.string.bt_increment_counter))
+                .performClick()
+        }
         // Check that the counter was incremented
-        composeTestRule.onNodeWithText(composeTestRule.activity.getString(R.string.clicks_count, 1)).assertExists()
+        composeTestRule.onNodeWithText(composeTestRule.activity.getString(R.string.clicks_count, 3)).assertExists()
     }
 }

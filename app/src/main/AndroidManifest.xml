@@ -24,6 +24,11 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter></activity>
+        <activity android:name=".GesturesActivity"
+            android:theme="@style/Theme.MyApplication.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter></activity>
     </application>
 
 </manifest>

@@ -19,7 +19,7 @@ buildscript {
 allprojects {
     repositories {
         maven {
-            def snapshot = "7094152"
+            def snapshot = "7107201"
             url  "https://androidx.dev/snapshots/builds/$snapshot/artifacts/repository/"
         }
         google()
