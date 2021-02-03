@@ -1,8 +1,5 @@
 package com.example.jalc.myapplication
 
-import android.content.Context
-import androidx.compose.runtime.Providers
-import androidx.compose.ui.platform.AmbientContext
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
@@ -16,7 +13,7 @@ import org.junit.runner.RunWith
 
 
 @RunWith(AndroidJUnit4::class)
-class CounterTest {
+class CounterTestAndroid {
 
     @get:Rule
     val composeTestRule = createAndroidComposeRule<MainActivity>()
@@ -32,7 +29,6 @@ class CounterTest {
     @Test
     fun counter_initially_zero() {
         // Given a counter in its initial state, assert that it has zero clicks
-        val text = composeTestRule.activity.getString(R.string.clicks_count, 0)
         composeTestRule.onNodeWithText("Clicks: 0").assertExists()
     }
 
@@ -40,12 +36,12 @@ class CounterTest {
     fun clickButton_incrementsCounter() {
         // Click on the button to increment the number of clicks
         composeTestRule
-            .onNodeWithText("Increment counter")
+            .onNodeWithText(composeTestRule.activity.getString(R.string.bt_increment_counter))
             .performClick()
 
         // Check that the counter was incremented
         composeTestRule
-            .onNodeWithText("Clicks: 1")
+            .onNodeWithText(composeTestRule.activity.getString(R.string.clicks_count, 1))
             .assertExists()
     }
 }

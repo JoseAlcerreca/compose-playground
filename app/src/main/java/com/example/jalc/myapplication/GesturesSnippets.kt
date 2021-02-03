@@ -42,6 +42,7 @@ import androidx.compose.material.Text
 import androidx.compose.material.rememberSwipeableState
 import androidx.compose.material.swipeable
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -351,11 +352,11 @@ private fun ScrollBoxes() {
     }
 }
 @Composable
-private fun ScrollBoxesSmooth(scope: CoroutineScope = rememberCoroutineScope()) {
+fun ScrollBoxesSmooth() {
 
     // Smoothly scroll 100px on first composition
     val state = rememberScrollState()
-    SideEffect(effect = { scope.launch { state.smoothScrollTo(100f) } })
+    LaunchedEffect(Unit) { state.smoothScrollTo(100f) }
 
     Column(modifier = Modifier
         .background(Color.LightGray)

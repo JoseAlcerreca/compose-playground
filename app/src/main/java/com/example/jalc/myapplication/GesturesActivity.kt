@@ -112,11 +112,11 @@ class GesturesActivity : AppCompatActivity() {
 //                        pages[page]?.invoke() ?: Text("error")
 //                    }
                     //ZoomableSample()
-                   DetectMultitouchGestures()
+                   //DetectMultitouchGestures()
                     //SwipeableSample()
 //                    DragSnippet2()
 //                    ScrollBoxes()
-                    //ScrollBoxesSmooth()
+                    ScrollBoxesSmooth()
                     //NestedScrollSample()
                     //ScrollableSample()
 //                    Nested2()

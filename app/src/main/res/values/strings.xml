@@ -2,4 +2,5 @@
     <string name="app_name">My Application</string>
     <string name="bt_increment_counter">Increment counter</string>
     <string name="clicks_count">Clicks: %d</string>
+    <string name="hello">hello</string>
 </resources>

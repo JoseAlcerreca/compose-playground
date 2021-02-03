@@ -48,6 +48,7 @@ fun Counter() {
     Column {
         Button(modifier = Modifier.padding(16.dp), onClick = { counter++ }) {
             Text(stringResource(R.string.bt_increment_counter))
+            val t = stringResource(R.string.hello)
         }
         Text(text = stringResource(R.string.clicks_count, counter))
     }
