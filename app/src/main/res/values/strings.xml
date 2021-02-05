@@ -3,4 +3,5 @@
     <string name="bt_increment_counter">Increment counter</string>
     <string name="clicks_count">Clicks: %d</string>
     <string name="hello">hello</string>
+    <string name="title_activity_coroutines">My Compose App</string>
 </resources>

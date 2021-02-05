@@ -10,6 +10,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
         <activity
+            android:name=".CoroutinesActivity"
+            android:label="@string/title_activity_coroutines"
+            android:theme="@style/Theme.MyApplication.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
             android:theme="@style/Theme.MyApplication.NoActionBar">
@@ -19,16 +27,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainInteropActivity"
+        <activity
+            android:name=".MainInteropActivity"
             android:theme="@style/Theme.MyApplication.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-            </intent-filter></activity>
-        <activity android:name=".GesturesActivity"
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".GesturesActivity"
             android:theme="@style/Theme.MyApplication.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-            </intent-filter></activity>
+            </intent-filter>
+        </activity>
+        <activity android:name="androidx.activity.ComponentActivity" />
     </application>
 
 </manifest>
