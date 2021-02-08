@@ -10,6 +10,7 @@ import androidx.compose.ui.viewinterop.viewModel
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.withContext
 
 
 class CoroutinesActivity : AppCompatActivity() {
@@ -27,10 +28,12 @@ fun LoadingDataThing(viewmodel: MyViewModel = viewModel()) {
     Text((result.value as? Result.Success)?.data ?: "Loading")
 }
 
-class MyViewModel(val dispatcher: CoroutineDispatcher) : ViewModel() {
+class MyViewModel(private val dispatcher: CoroutineDispatcher) : ViewModel() {
     suspend fun giveMeData(): Result {
-        delay(500)
-        return Result.Success("OK!")
+        return withContext(dispatcher) {
+            delay(500)
+            Result.Success("OK!")
+        }
     }
 }
 

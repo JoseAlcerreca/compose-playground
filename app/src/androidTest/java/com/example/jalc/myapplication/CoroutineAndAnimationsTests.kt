@@ -41,7 +41,7 @@ import androidx.compose.ui.viewinterop.viewModel
 import androidx.lifecycle.ViewModel
 
 @RunWith(AndroidJUnit4::class)
-class CoroutineTests {
+class CoroutineAndAnimationsTests {
     @get:Rule
     val composeTestRule = createAndroidComposeRule<ComponentActivity>()
 
