@@ -1,8 +1,6 @@
 package com.example.jalc.myapplication
 
 import android.content.Context
-import androidx.compose.runtime.Providers
-import androidx.compose.ui.platform.AmbientContext
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText

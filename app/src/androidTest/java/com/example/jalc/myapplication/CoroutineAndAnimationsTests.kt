@@ -34,11 +34,6 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import kotlin.math.roundToInt
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.produceState
-import androidx.compose.runtime.setValue
-import androidx.compose.ui.viewinterop.viewModel
-import androidx.lifecycle.ViewModel
 
 @RunWith(AndroidJUnit4::class)
 class CoroutineAndAnimationsTests {
@@ -73,7 +68,7 @@ fun ScrollBoxesSmoothAnimations() {
 
     // Smoothly scroll 100px on first composition
     val state = rememberScrollState()
-    LaunchedEffect(Unit) { state.smoothScrollTo(100f) }
+    LaunchedEffect(Unit) { state.animateScrollTo(100) }
 
     // Move the list up and down indefinitely
     val transition = rememberInfiniteTransition()
