@@ -3,6 +3,8 @@ package com.example.jalc.myapplication
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.channels.Channel.Factory.CONFLATED
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -14,9 +16,8 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.TestCoroutineScope
 import kotlinx.coroutines.test.runBlockingTest
+import org.junit.Assert.assertEquals
 import org.junit.Test
-
-import org.junit.Assert.*
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class ExposingEffectsTest {
@@ -131,6 +132,43 @@ class ExposingEffectsTest {
             assertEquals(listOf(1, 2, 3), testResults)
             // Second observer only gets new updates
             assertEquals(listOf(3), testResults2)
+        }
+    }
+
+    @Test
+    fun channelConflatedTest() {
+
+        val _channel = Channel<Int>(capacity = CONFLATED)
+        val exposedFlow: Flow<Int> = _channel.receiveAsFlow()
+
+        val testResults = mutableListOf<Int>()
+        val testResults2 = mutableListOf<Int>()
+
+        runBlockingTest {
+            _channel.send(0)
+            _channel.send(1)
+            _channel.send(2)
+            val observer1 = exposedFlow
+
+            val job1 = launch {
+                observer1.toList(testResults)
+            }
+
+            val observer2 = exposedFlow
+
+            val job2 = launch {
+                observer2.toList(testResults2)
+            }
+
+            _channel.send(3)
+
+            job1.cancel()
+            job2.cancel()
+
+            // The first observer gets buffer + new updates
+            assertEquals(listOf(2, 3), testResults)
+            // Second observer only gets new updates
+            assertEquals(listOf<Int>(), testResults2)
         }
     }
 }
