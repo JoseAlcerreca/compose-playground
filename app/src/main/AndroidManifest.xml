@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
         <activity
-            android:name=".CoroutinesActivity"
+            android:name=".NavigationEffectActivity"
             android:label="@string/title_activity_coroutines"
             android:theme="@style/Theme.MyApplication.NoActionBar">
             <intent-filter>
