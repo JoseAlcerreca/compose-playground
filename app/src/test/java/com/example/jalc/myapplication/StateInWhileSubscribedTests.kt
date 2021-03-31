@@ -145,6 +145,9 @@ class StateInWhileSubscribedTests {
 
             f2.emit("1")
             yield()
+            yield()
+            yield()
+            yield()
             job1.cancel()
 
             println(testResults1)
@@ -166,12 +169,18 @@ class StateInWhileSubscribedTests {
 
             f2.emit("2")
             yield()
+            yield()
+            yield()
+            yield()
             println("Collect again:")
             val job3 = launch(CoroutineName("My-Coroutine3")) {
                 f3.collect {
                     testResults3.add(it)
                 }
             }
+            yield()
+            yield()
+            yield()
             job3.cancel()
 
             println(testResults3)
@@ -182,9 +191,9 @@ class StateInWhileSubscribedTests {
             yield()
         }
 
-        assertEquals(listOf("A+0", "A+1"), testResults1)
+        assertEquals(listOf("Initcombine", "A+0", "A+1"), testResults1)
         assertEquals(listOf("A+1"), testResults2)
-        assertEquals(listOf("A+2"), testResults3)
+        assertEquals(listOf("A+1", "A+2"), testResults3)
 
         // Exactly 4 calls to combineCalls because of f2.emit("3") and zero timeout
         assertEquals(4, combineCalls)
